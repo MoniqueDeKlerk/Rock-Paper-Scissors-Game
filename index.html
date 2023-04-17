@@ -16,48 +16,62 @@
     />
     <title>Rock, Paper, Scissors</title>
   </head>
+
   <body>
-    <header><h1>Rock Paper Scissors</h1></header>
-    <div class="scoreboard">
-      <div
-        class="score"
-        id="user-lable"
-      >
-        User
-      </div>
-      <div
-        class="score"
-        id="computer-lable"
-      >
-        Computer
-      </div>
-      <span id="user-score">0</span>: <span class="computer-score">0</span>
-    </div>
-    <div class="result">
-      <p>Paper covers rock. You win!</p>
-    </div>
+    <header>
+      <h1>Rock Paper Scissors</h1>
+    </header>
     <div class="container">
+      <div class="scoreboard">
+        <div
+          class="score"
+          id="user-lable"
+        >
+          User
+        </div>
+        <div
+          class="score"
+          id="computer-lable"
+        >
+          Computer
+        </div>
+        <span id="user-score">0</span> : <span id="computer-score">0</span>
+      </div>
+      <div class="btn-container-">
+        <button
+          disabled="disabled"
+          id="restart"
+        >
+          Restart
+        </button>
+      </div>
+      <div class="result">
+        <p></p>
+      </div>
       <div class="btn-container">
         <button
           class="btn"
-          id="rock"
+          id="Rock"
         >
           🪨
         </button>
         <button
           class="btn"
-          id="paper"
+          id="Paper"
         >
           🗞️
         </button>
         <button
           class="btn"
-          id="scissors"
+          id="Scissors"
         >
           ✂️
         </button>
       </div>
-      <div id="action-message">Make your move</div>
+      <div id="choices">
+        <h2>User Plays: <span id="user-choice"></span></h2>
+        <h2>Computer Plays:<span id="computer-choice"></span></h2>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
