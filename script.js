@@ -98,7 +98,6 @@ function rounds() {
     scissors_btn.classList.add('hidden');
     choiceDisplay.classList.add('hidden');
     restartBtn.classList.remove('hidden');
-    restartBtn.disabled = false;
   } else if (computerScore === 5) {
     result_div.innerHTML = `Game over!  🖥️ Wins`;
     rock_btn.classList.add('hidden');
@@ -106,7 +105,6 @@ function rounds() {
     scissors_btn.classList.add('hidden');
     choiceDisplay.classList.add('hidden');
     restartBtn.classList.remove('hidden');
-    restartBtn.disabled = false;
   }
 }
 
