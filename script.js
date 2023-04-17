@@ -1,167 +1,121 @@
-<<<<<<< HEAD
 'use strict';
 
-function getComputerChoice() {
+//Caching the DOM
+let userScore = 0;
+let computerScore = 0;
+const userScore_span = document.getElementById('user-score');
+const computerScore_span = document.getElementById('computer-score');
+const scoreBoard_div = document.querySelector('.score-board');
+const result_div = document.querySelector('.result');
+const rock_btn = document.getElementById('Rock');
+const paper_btn = document.getElementById('Paper');
+const scissors_btn = document.getElementById('Scissors');
+const playerChoice_btns = document.querySelectorAll('.btn');
+const choiceDisplay = document.getElementById('choices');
+const userChoiceDisplay_span = document.getElementById('user-choice');
+const computerChoiceDisplay_span = document.getElementById('computer-choice');
+const restartBtn = document.getElementById('restart');
+let userChoice;
+let computerChoice;
+
+//User choice
+playerChoice_btns.forEach((buttons) => {
+  buttons.addEventListener('click', (e) => {
+    userChoice = e.target.id;
+    userChoiceDisplay_span.innerHTML = userChoice;
+    getComputerSelection();
+    game();
+    rounds();
+  });
+});
+
+//Compuer Choice
+function getComputerSelection() {
   const choice = [`Rock`, `Paper`, `Scissor`];
   const x = Math.floor(Math.random() * choice.length);
-  return choice[x];
+  computerChoice = choice[x];
+  computerChoiceDisplay_span.innerHTML = computerChoice;
 }
 
-function playRound(playerSelection, computerSelection) {
-  if (
-    (playerSelection == `Rock` && computerSelection == `Scissor`) ||
-    (playerSelection == `Paper` && computerSelection == `Rock`) ||
-    (playerSelection == `Scissor` && computerSelection == `Paper`)
-  ) {
-    return `I win, You lost!
-    Player
-    ${playerSelection}:
-    Computer
-    ${computerSelection}`;
-  } else if (
-    (playerSelection == `Rock` && computerSelection == `Rock`) ||
-    (playerSelection == `Paper` && computerSelection == `Paper`) ||
-    (playerSelection == `Scissor` && computerSelection == `Scissor`)
-  ) {
-    return `Its a draw!
-    Player
-    ${playerSelection}:
-    Computer
-    ${computerSelection}
-  }`;
-  } else {
-    return `I loose! You win!
-    Player
-    ${playerSelection}:
-    Computer
-    ${computerSelection}`;
-  }
+//Functions that keep score
+function userWins() {
+  userScore++;
+  userScore_span.innerHTML = userScore;
+  computerScore_span.innerHTML = computerScore;
+  result_div.innerHTML = `${userChoice} beats ${computerChoice} 🥷🏽 Wins`;
+  document.getElementById(userChoice).classList.add('green-glow');
+  setTimeout(function () {
+    document.getElementById(userChoice).classList.remove('green-glow');
+  }, 500);
 }
 
+function userLooses() {
+  computerScore++;
+  userScore_span.innerHTML = userScore;
+  computerScore_span.innerHTML = computerScore;
+  result_div.innerHTML = `${computerChoice} beats ${userChoice} 🖥️ Wins`;
+  document.getElementById(userChoice).classList.add('red-glow');
+  setTimeout(function () {
+    document.getElementById(userChoice).classList.remove('red-glow');
+  }, 500);
+}
+
+function draw() {
+  userScore_span.innerHTML = userScore;
+  computerScore_span.innerHTML = computerScore;
+  result_div.innerHTML = `${userChoice} : ${computerChoice} 🟰 Draw `;
+  document.getElementById(userChoice).classList.add('grey-glow');
+  setTimeout(function () {
+    document.getElementById(userChoice).classList.remove('grey-glow');
+  }, 500);
+}
+
+//Users Choice Function
 function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-
-  for (let i = 1; i <= 5; i++) {
-    const playerSelection = prompt(`Round${i}  Rock, Paper, Scissor`);
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-
-    if (
-      playRound(playerSelection, computerSelection) ==
-      `I win, You lost!
-    Player
-    ${playerSelection}:
-    Computer
-    ${computerSelection}`
-    ) {
-      playerScore++;
-    } else if (
-      playRound(playerSelection, computerSelection) ==
-      `I loose! You win!
-    Player
-    ${playerSelection}:
-    Computer
-    ${computerSelection}`
-    ) {
-      computerScore++;
-    }
-  }
-
-  console.log(`Game Over`);
-
-  if (playerScore > computerScore) {
-    console.log(`Player is the winner!`);
-  } else if (playerScore < computerScore) {
-    console.log(`Computer is the Winner!`);
-  } else {
-    console.log(`The final score is a tie!`);
-  }
-  console.log(playerScore, computerScore);
-}
-
-console.log(game());
-=======
-"use strict";
-
-function getComputerChoice() {
-  const choice = [`Rock`, `Paper`, `Scissor`];
-  const x = Math.floor(Math.random() * choice.length);
-  return choice[x];
-}
-
-function playRound(playerSelection, computerSelection) {
   if (
-    (playerSelection == `Rock` && computerSelection == `Scissor`) ||
-    (playerSelection == `Paper` && computerSelection == `Rock`) ||
-    (playerSelection == `Scissor` && computerSelection == `Paper`)
+    (userChoice == `Rock` && computerChoice == `Scissor`) ||
+    (userChoice == `Paper` && computerChoice == `Rock`) ||
+    (userChoice == `Scissor` && computerChoice == `Paper`)
   ) {
-    return `I win, You lost!  
-    Player
-    ${playerSelection}: 
-    Computer 
-    ${computerSelection}`;
+    userWins(userChoice, computerChoice);
   } else if (
-    (playerSelection == `Rock` && computerSelection == `Rock`) ||
-    (playerSelection == `Paper` && computerSelection == `Paper`) ||
-    (playerSelection == `Scissor` && computerSelection == `Scissor`)
+    (userChoice == `Rock` && computerChoice == `Rock`) ||
+    (userChoice == `Paper` && computerChoice == `Paper`) ||
+    (userChoice == `Scissor` && computerChoice == `Scissor`)
   ) {
-    return `Its a draw!   
-    Player
-    ${playerSelection}: 
-    Computer 
-    ${computerSelection}
-  }`;
+    draw(userChoice, computerChoice);
   } else {
-    return `I loose! You win! 
-    Player
-    ${playerSelection}: 
-    Computer 
-    ${computerSelection}`;
+    userLooses(userChoice, computerChoice);
   }
 }
 
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-
-  for (let i = 1; i <= 5; i++) {
-    const playerSelection = prompt(`Round${i}  Rock, Paper, Scissor`);
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-
-    if (
-      playRound(playerSelection, computerSelection) ==
-      `I win, You lost!  
-    Player
-    ${playerSelection}: 
-    Computer 
-    ${computerSelection}`
-    ) {
-      playerScore++;
-    } else if (
-      playRound(playerSelection, computerSelection) ==
-      `I loose! You win! 
-    Player
-    ${playerSelection}: 
-    Computer 
-    ${computerSelection}`
-    ) {
-      computerScore++;
-    }
+//Rounds
+function rounds() {
+  if (userScore === 5) {
+    result_div.innerHTML = `Game over!  🥷🏽 Wins`;
+    rock_btn.classList.add('hidden');
+    paper_btn.classList.add('hidden');
+    scissors_btn.classList.add('hidden');
+    choiceDisplay.classList.add('hidden');
+    restartBtn.classList.remove('hidden');
+  } else if (computerScore === 5) {
+    result_div.innerHTML = `Game over!  🖥️ Wins`;
+    rock_btn.classList.add('hidden');
+    paper_btn.classList.add('hidden');
+    scissors_btn.classList.add('hidden');
+    choiceDisplay.classList.add('hidden');
+    restartBtn.classList.remove('hidden');
   }
-
-  console.log(`Game Over`);
-
-  if (playerScore > computerScore) {
-    console.log(`Player is the winner!`);
-  } else if (playerScore < computerScore) {
-    console.log(`Computer is the Winner!`);
-  } else {
-    console.log(`The final score is a tie!`);
-  }
-  console.log(playerScore, computerScore);
 }
 
-console.log(game());
->>>>>>> 7c2eb5c344d1f56b37c604cd2141d45c982f15d4
+//Restart Game
+restartBtn.addEventListener('click', () => {
+  userScore = 0;
+  computerScore = 0;
+  userScore_span.innerHTML = userScore;
+  computerScore_span.innerHTML = computerScore;
+  rock_btn.classList.remove('hidden');
+  paper_btn.classList.remove('hidden');
+  scissors_btn.classList.remove('hidden');
+  choiceDisplay.classList.remove('hidden');
+});
